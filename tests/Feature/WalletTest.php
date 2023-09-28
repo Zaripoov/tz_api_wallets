@@ -49,10 +49,10 @@ class WalletTest extends TestCase
 
         $this->assertJsonDocumentMatchesSchema($responseContent, [
             'type' => 'object',
-            'required' => ['state', 'state'],
+            'required' => ['data', 'state'],
             'properties' => [
-                'items' => [
-                    'type' => 'array',
+                'data' => [
+                    'type' => 'object',
                     'data' => [
                         'type' => 'object',
                         'required' => ['id', 'currency', 'public_key', 'balance',],
