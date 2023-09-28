@@ -6,14 +6,25 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
+/**
+ * @OA\Info(
+ *     version="1.0.0",
+ *     title="Crypto API-документация",
+ *     description="Crypto API-документация",
+ * ),
+ * @OA\Server(
+ *     url="/v1/",
+ * )
+ */
 class ApiController extends Controller
 {
-    public function responseSuccess(?array $data = []): JsonResponse
+    public function responseSuccess(?array $data = [], int $status = Response::HTTP_OK): JsonResponse
     {
-        return response()->json([
-            'state' => 0,
-            'data' => $data
-        ]);
+        return response()->json(
+            data: [
+                'data' => $data,
+            ],
+            status: $status);
     }
 
     public function responseErrorMessage(string $message): JsonResponse
@@ -31,8 +42,6 @@ class ApiController extends Controller
 
     public function responseError(array $data = []): JsonResponse
     {
-        $data['state'] = 1;
-
         return response()->json(
             $data,
             Response::HTTP_UNPROCESSABLE_ENTITY

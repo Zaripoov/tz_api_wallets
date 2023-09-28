@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class WalletTest extends TestCase
@@ -18,7 +19,7 @@ class WalletTest extends TestCase
 
         $this->assertJsonDocumentMatchesSchema($responseContent, [
             'type' => 'object',
-            'required' => ['data', 'state'],
+            'required' => ['data'],
             'properties' => [
                 'data' => [
                     'type' => 'array',
@@ -36,7 +37,7 @@ class WalletTest extends TestCase
             ],
         ]);
 
-        $get->assertStatus(200);
+        $get->assertStatus(Response::HTTP_OK);
     }
 
     /**
@@ -49,7 +50,7 @@ class WalletTest extends TestCase
 
         $this->assertJsonDocumentMatchesSchema($responseContent, [
             'type' => 'object',
-            'required' => ['data', 'state'],
+            'required' => ['data'],
             'properties' => [
                 'data' => [
                     'type' => 'object',
@@ -67,6 +68,6 @@ class WalletTest extends TestCase
             ],
         ]);
 
-        $get->assertStatus(200);
+        $get->assertStatus(Response::HTTP_CREATED);
     }
 }
